@@ -12,7 +12,7 @@ export class Provider extends React.Component{
         .then(res => res.json())
         .then((data) => {
             this.setState({post: data})
-           // console.log(this.state.post)
+            console.log(this.state.post)
         }) 
         .catch(console.log)
     }
