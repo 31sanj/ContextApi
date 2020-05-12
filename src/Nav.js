@@ -7,7 +7,7 @@ function Nav(){
         <nav>
             <ul className="nav-links">
                 <Link to='/posts'>
-                <li>Posts</li>
+                <li>List Of Posts from jsonplacholder</li>
                 </Link>
             </ul>
         </nav>

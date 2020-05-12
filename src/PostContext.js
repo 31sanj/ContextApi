@@ -1,29 +1,26 @@
-import React,{createContext} from 'react';
+import React,{createContext, useState, useEffect} from 'react';
 
-const Context = createContext();
+export const PostContext = createContext();
 
-export class Provider extends React.Component{
-    state={
-        post:[]
-    }
+export const Provider = (props) => {
+    
+    const [item, setItem] = useState([]);
 
-    componentDidMount(){
-        fetch(`http://jsonplaceholder.typicode.com/posts`)
-        .then(res => res.json())
-        .then((data) => {
-            this.setState({post: data})
-            console.log(this.state.post)
-        }) 
-        .catch(console.log)
-    }
+    useEffect(() => {
+        fetchItems()
+    },[]);
 
-    render(){
-        return(
-            <Context.Provider value={this.state}>
-                {this.props.children}
-            </Context.Provider>
-        )
-    }
+    const fetchItems = async () => {
+        const data = await fetch(`http://jsonplaceholder.typicode.com/posts`);
+        const item = await data.json();
+        setItem(item);
+        console.log(item);
+    };
+
+    return(
+        <PostContext.Provider value={{item}}>
+            {props.children}
+        </PostContext.Provider>
+    )
 }
 
-export const Consumer = Context.Consumer;
